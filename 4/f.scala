@@ -33,7 +33,28 @@ def itf(n: Int): Long = {
 }
 
 object Main extends App {
-  //println(recf(97L))
-  println(tailf(90, 0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L))
-  println(itf(90))
+  println("iterativo:")
+  for (i <- 0 to 198 by 18) {
+    val start = System.nanoTime
+    val result = itf(i)
+    val duration = (System.nanoTime - start) / 1e6d
+
+    println(s"$i: $result (${f"$duration%1.14f"} s)")
+  }
+  println("recursivo de cola:")
+  for (i <- 0 to 198 by 18) {
+    val start = System.nanoTime
+    val result = tailf(i, 0L, 1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L)
+    val duration = (System.nanoTime - start) / 1e6d
+
+    println(s"$i: $result (${f"$duration%1.14f"} s)")
+  }
+  println("recursivo:")
+  for (i <- 0 to 198 by 18) {
+    val start = System.nanoTime
+    val result = recf(i)
+    val duration = (System.nanoTime - start) / 1e6d
+
+    println(s"$i: $result (${f"$duration%1.14f"} s)")
+  }
 }
