@@ -1,6 +1,6 @@
 from type import Type
 
-class Array(Type):
+class ArrayType(Type):
     def __init__(self, name, type, length):
         super().__init__(name)
         self.type = type
@@ -23,9 +23,9 @@ class Array(Type):
         return self.type.alignment(packed_structs, packed_arrays)
     
     def waste(self, packed_structs = False, packed_arrays = False):
-        if (packed_arrays):
-            return 0
-
         type_waste = self.type.waste(packed_structs, packed_arrays)
+        
+        if (packed_arrays):
+            return type_waste * self.length
         
         return self.size() - self.type.size() * self.length + type_waste * self.length

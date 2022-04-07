@@ -1,6 +1,6 @@
-from array import Array
+from array_type import ArrayType
 from atomic import Atomic
-from struct import Struct
+from struct_type import StructType
 
 symbol_table = {}
 
@@ -28,7 +28,7 @@ def struct_action(args):
         if type not in symbol_table:
             raise Exception(f"Unknown type: {type}")
     
-    symbol_table[name] = Struct(name, list(map(lambda t: symbol_table[t], types)))
+    symbol_table[name] = StructType(name, list(map(lambda t: symbol_table[t], types)))
 
 def array_action(args):
     name, type, size = args
@@ -39,7 +39,7 @@ def array_action(args):
     if type not in symbol_table:
         raise Exception(f"Unknown type: {type}")
     
-    symbol_table[name] = Array(name, symbol_table[type], int(size))
+    symbol_table[name] = ArrayType(name, symbol_table[type], int(size))
 
 def describe_action(args):
     name, *_ = args
